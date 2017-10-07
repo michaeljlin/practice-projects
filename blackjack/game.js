@@ -37,11 +37,22 @@ function Game(){
 
     this.startGame = function(){
         self.startDeck();
-
         dealer.addCard(newGame.pullCards());
+        var dealerCard1suite = dealer.cardHand[0].suite;
+        var dealerCard1value = dealer.cardHand[0].value;
+        $('#dealerCard1').append(dealerCard1suite,dealerCard1value);
         player.addCard(newGame.pullCards());
+        var playerCard1suite = player.cardHand[0].suite;
+        var playerCard1value = player.cardHand[0].value;
+        $('#playerCard1').append(playerCard1suite,playerCard1value);
         dealer.addCard(newGame.pullCards());
+        var dealerCard2suite = dealer.cardHand[1].suite;
+        var dealerCard2value = dealer.cardHand[1].value;
+            $('#dealerCard2').append(dealerCard2suite,dealerCard2value);
         player.addCard(newGame.pullCards());
+        var playerCard2suite = player.cardHand[1].suite;
+        var playerCard2value = player.cardHand[1].value;
+            $('#playerCard2').append(playerCard2suite, playerCard2value);
 
         console.log("Game has started!");
 
@@ -77,6 +88,9 @@ function Player(){
 
     this.hit = function(){
         self.addCard(newGame.pullCards());
+        var playerCard3suite = player.cardHand[2].suite;
+        var playerCard3value = dealer.cardHand[2].value;
+        $('#playerCard3').append(playerCard3suite,playerCard3value);
         console.log("Player draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
 
         self.playerValue = dealer.checkPlayerCount(self.cardHand);
@@ -207,7 +221,7 @@ var player = new Player();
 
 var newGame = new Game();
 
-$(document).ready(newGame.startGame);
+$(document).ready(initializeApp);
 
 //  console.log(newGame.cardDeck);
 
@@ -220,3 +234,8 @@ function addClick(){
 // $('#hit').click(function(){
 //     console.log('hit button hit')
 // });
+
+function initializeApp() {
+    newGame.startGame();
+    addClick();
+}
