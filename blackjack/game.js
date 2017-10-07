@@ -54,6 +54,8 @@ function Game(){
         player.resetHand();
         dealer.resetHand();
         self.cardDeck = [];
+        $('.player').text('').append($('<p>').text('Player'));
+        $('.dealer').text('').append($('<p>').text('Dealer'));
         self.startGame();
     }
 
@@ -66,7 +68,7 @@ function Player(){
     this.hasAce = false;
 
     this.addCard = function(card){
-        if(card.number === 'A'){
+        if(card.number === 'Ace'){
             self.hasAce = true;
         }
 
@@ -236,6 +238,8 @@ $(document).ready(initializeApp);
 
 function addClick(){
     $('#hit').click(player.hit);
+    $('#stay').click(player.stay);
+    $('#reset').click(newGame.resetGame);
 }
 
 
