@@ -137,8 +137,13 @@ function Dealer(){
     var self = this;
     this.cardHand = [];
     this.dealerValue = 0;
+    this.hasAce = false;
 
     this.addCard = function(card){
+        if(card.number === 'ace'){
+            self.hasAce = true;
+        }
+
         self.cardHand.push(card);
         self.setCard(card);
 
@@ -171,6 +176,10 @@ function Dealer(){
 
     this.hit = function(){
         self.dealerValue = dealer.checkDealerCount(self.cardHand);
+
+        if(self.dealerValue === 11 && self.hasAce === true){
+            self.dealerValue = 21;
+        }
 
         if($('.dealer img:nth-child(2)').attr('src') === 'images/cardback.svg'){
             $('.dealer img:nth-child(2)').attr('src', self.cardHand[0].image);
