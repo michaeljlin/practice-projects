@@ -3,7 +3,7 @@ function game(){
     this.cardDeck = [];
     this.suiteRef = ['Diamond','Club','Spades','Hearts'];
     this.numRef = ['A',2,3,4,5,6,7,8,9,10,'J','Q','K'];
-    this.turn = 1;
+    this.turn = 0;
 
     this.startDeck = function(){
         for(var i = 0; i< self.suiteRef.length; i++){
@@ -36,8 +36,11 @@ function game(){
         player.addCard(newGame.pullCards());
 
 
-    }
+    };
 
+    this.turnChange = function(){
+        this.turn = 1 - self.turn;
+    }
 }
 
 function Player(){
