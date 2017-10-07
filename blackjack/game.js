@@ -48,12 +48,22 @@ function Game(){
         dealer.addCard(newGame.pullCards());
         player.addCard(newGame.pullCards());
 
+        console.log("Game has started!");
+
+
+
     };
 
     this.turnChange = function(){
         this.turn = 1 - self.turn;
-    }
+    };
 
+    this.resetGame = function(){
+        player.resetHand();
+        dealer.resetHand();
+        self.cardDeck = [];
+        self.startGame();
+    }
 
 }
 
@@ -72,6 +82,8 @@ function Player(){
 
     this.hit = function(){
         self.addCard(newGame.pullCards());
+        console.log("Player draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
+
         self.playerValue = dealer.checkPlayerCount(self.cardHand);
 
         if(self.playerValue > 21){
@@ -86,7 +98,13 @@ function Player(){
         self.playerValue = dealer.checkPlayerCount(self.cardHand);
 
         dealer.hit();
-    }
+    };
+
+    this.resetHand = function(){
+        self.cardHand = [];
+        self.playerValue = 0;
+    };
+
 }
 
 function Dealer(){
@@ -125,6 +143,8 @@ function Dealer(){
 
     this.hit = function(){
         self.addCard(newGame.pullCards());
+        console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
+
         self.dealerValue = dealer.checkDealerCount(self.cardHand);
 
         if(self.dealerValue > 21){
@@ -147,7 +167,6 @@ function Dealer(){
             }
         }
         else if(self.dealerValue <= 16){
-            console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
             self.hit();
         }
         else{
@@ -161,6 +180,11 @@ function Dealer(){
 
     this.setCard = function(){
 //      $('#dealerCard1').text(self.cardHand[1].suite+self.cardHand[1].number);
+    };
+
+    this.resetHand = function(){
+        self.cardHand = [];
+        self.dealerValue = 0;
     };
 }
 
@@ -179,7 +203,7 @@ var player = new Player();
 
 var newGame = new Game();
 
-newGame.startDeck();
+$(document).ready(newGame.startGame);
 
 //  console.log(newGame.cardDeck);
 
