@@ -1,4 +1,4 @@
-function game(){
+function Game(){
     var self = this;
     this.cardDeck = [];
     this.suiteRef = ['Diamond','Club','Spades','Hearts'];
@@ -71,15 +71,15 @@ function Dealer(){
     this.addCard = function(card){
         self.cardHand.push(card);
         self.setCard();
-    }
+    };
 
     this.checkCard = function(){
         return self.cardHand;
-    }
+    };
 
     this.setCard = function(){
 //      $('#dealerCard1').text(self.cardHand[1].suite+self.cardHand[1].number);
-    }
+    };
 }
 
 function Card(suite, number){
@@ -93,7 +93,7 @@ var dealer = new Dealer();
 
 var player = new Player();
 
-var newGame = new game();
+var newGame = new Game();
 
 newGame.startDeck();
 
