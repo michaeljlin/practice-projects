@@ -66,9 +66,16 @@ function Player(){
     var self = this;
     this.cardHand = [];
     this.playerValue = 0;
+    this.hasAce = false;
 
     this.addCard = function(card){
+        if(card.number === 'A'){
+            self.hasAce = true;
+        }
+
         self.cardHand.push(card);
+
+        return card;
     };
 
     this.checkCard = function(){
@@ -92,6 +99,10 @@ function Player(){
     this.stay = function(){
         self.playerValue = dealer.checkPlayerCount(self.cardHand);
 
+        if(self.hasAce === true && self.playerValue < 11){
+            self.aceSwap();
+        }
+
         dealer.hit();
     };
 
@@ -100,6 +111,9 @@ function Player(){
         self.playerValue = 0;
     };
 
+    this.aceSwap = function(){
+        this.playerValue += 10;
+    }
 }
 
 function Dealer(){
@@ -110,6 +124,8 @@ function Dealer(){
     this.addCard = function(card){
         self.cardHand.push(card);
         self.setCard();
+
+        return card;
     };
 
     this.checkPlayerCount = function(playerHand){
