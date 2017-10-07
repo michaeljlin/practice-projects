@@ -1,3 +1,8 @@
+$(document).ready(newGame.startGame;
+    addClick
+);
+
+
 function Game(){
     var self = this;
     this.cardDeck = [];
@@ -177,3 +182,13 @@ var newGame = new Game();
 newGame.startDeck();
 
 //  console.log(newGame.cardDeck);
+
+//
+function addClick(){
+    $('#hit').click(player.hit);
+}
+
+//
+// $('#hit').click(function(){
+//     console.log('hit button hit')
+// });

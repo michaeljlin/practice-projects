@@ -6,6 +6,27 @@
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="game.js"></script>
     <title>JS Bin</title>
+    <style>
+        .dealer {
+            height:300px;
+            width:100%;
+            border:1px solid black;
+
+        }
+
+        .player {
+            height:300px;
+            width:100%;
+            border: 1px solid black;
+            position: fixed; bottom: 0;
+        }
+
+        .board {
+            text-align: center;
+            margin-top:50px;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -18,6 +39,7 @@
     <div id="turn">Turn:</div>
     <button id="hit">Hit</button>
     <button id="stay">Stay</button>
+    <button id="reset">Reset</button>
 </div>
 
 <div class = "player">
