@@ -23,7 +23,7 @@
             justify-content: space-around;
         }
 
-        .player {
+        .activePlayer {
             height:150px;
             width:50%;
             border: 1px solid black;
@@ -43,6 +43,7 @@
             height:100%;
             width:100px;
             display:inline-block;
+            box-sizing: border-box;
         }
 
     </style>
@@ -60,10 +61,26 @@
             <button id="hit">Hit</button>
             <button id="stay">Stay</button>
             <button id="reset">Reset</button>
+            <p class="result"></p>
         </div>
 
-        <div class = "player">
+        <div class = "activePlayer player1">
             <p>Player</p>
+        </div>
+
+        <div class="player2">
+
+        </div>
+
+        <div class="player3">
+
+        </div>
+
+        <div class="player4">
+
+        </div>
+
+        <div class="player5">
 
         </div>
     </div>

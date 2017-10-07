@@ -54,8 +54,9 @@ function Game(){
         player.resetHand();
         dealer.resetHand();
         self.cardDeck = [];
-        $('.player').text('').append($('<p>').text('Player'));
+        $('.player1').text('').append($('<p>').text('Player'));
         $('.dealer').text('').append($('<p>').text('Dealer'));
+        $('.result').text('');
         self.startGame();
     }
 
@@ -84,15 +85,18 @@ function Player(){
 
     this.hit = function(){
         self.addCard(newGame.pullCards());
-        // var playerCard3suite = player.cardHand[2].suite;
-        // var playerCard3value = dealer.cardHand[2].value;
-        // $('#playerCard3').append(playerCard3suite,playerCard3value);
+
         console.log("Player draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
 
         self.playerValue = dealer.checkPlayerCount(self.cardHand);
 
         if(self.playerValue > 21){
             console.log("Player has busted!");
+            $('.result').text("Player has busted!");
+        }
+        else if(self.playerValue === 21){
+            console.log("Player has 21, automatically ending turn!");
+            self.stay();
         }
         else{
             console.log("Player continues to play");
@@ -112,7 +116,7 @@ function Player(){
     this.setCard = function(card){
         var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
 
-        $('.player').append(newCardElement);
+        $('.player1').append(newCardElement);
     };
 
     this.resetHand = function(){
@@ -166,15 +170,18 @@ function Dealer(){
 
         if(self.dealerValue > 21){
             console.log("Dealer has busted!");
+            $('.result').text("Dealer has busted!");
         }
         else if(self.dealerValue === '21'){
             console.log("Dealer has 21!");
 
             if(player.playerValue < dealer.dealerValue){
                 console.log("Dealer has won!");
+                $('.result').text("Dealer has won!");
             }
             else{
                 console.log("Equal value, draw game!");
+                $('.result').text("Equal value, draw game!");
             }
 
         }
@@ -183,12 +190,15 @@ function Dealer(){
 
             if(player.playerValue > dealer.dealerValue){
                 console.log("Player has won!");
+                $('.result').text("Player has won!");
             }
             else if(player.playerValue < dealer.dealerValue){
                 console.log("Dealer has won!");
+                $('.result').text("Dealer has won!");
             }
             else{
                 console.log("Equal value, draw game!");
+                $('.result').text("Equal value, draw game!");
             }
         }
         else if(self.dealerValue <= 16){
