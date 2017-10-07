@@ -1,8 +1,3 @@
-$(document).ready(newGame.startGame;
-    addClick
-);
-
-
 function Game(){
     var self = this;
     this.cardDeck = [];
@@ -142,9 +137,6 @@ function Dealer(){
     };
 
     this.hit = function(){
-        self.addCard(newGame.pullCards());
-        console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
-
         self.dealerValue = dealer.checkDealerCount(self.cardHand);
 
         if(self.dealerValue > 21){
@@ -152,6 +144,14 @@ function Dealer(){
         }
         else if(self.dealerValue === '21'){
             console.log("Dealer has 21!");
+
+            if(player.playerValue < dealer.dealerValue){
+                console.log("Dealer has won!");
+            }
+            else{
+                console.log("Equal value, draw game!");
+            }
+
         }
         else if(self.dealerValue > 16){
             console.log('Game has ended! Comparing cards!');
@@ -167,6 +167,10 @@ function Dealer(){
             }
         }
         else if(self.dealerValue <= 16){
+
+            self.addCard(newGame.pullCards());
+            console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
+
             self.hit();
         }
         else{
