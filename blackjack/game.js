@@ -1,8 +1,8 @@
 function Game(){
     var self = this;
     this.cardDeck = [];
-    this.suiteRef = ['Diamonds','Clubs','Spades','Hearts'];
-    this.numRef = ['Ace',2,3,4,5,6,7,8,9,10,'Jack','Queen','King'];
+    this.suiteRef = ['diamonds','clubs','spades','hearts'];
+    this.numRef = ['ace',2,3,4,5,6,7,8,9,10,'jack','queen','king'];
     this.turn = 0;
 
     this.startDeck = function(){
@@ -18,7 +18,9 @@ function Game(){
                     value = j+1;
                 }
 
-                var newCard = new Card(self.suiteRef[i], self.numRef[j], value);
+                var urlString = "images/"+self.numRef[j] + "_of_"+self.suiteRef[i]+".svg";
+
+                var newCard = new Card(self.suiteRef[i], self.numRef[j], value, urlString);
                 self.cardDeck.push(newCard);
 
             }
@@ -69,7 +71,7 @@ function Player(){
     this.hasAce = false;
 
     this.addCard = function(card){
-        if(card.number === 'Ace'){
+        if(card.number === 'ace'){
             self.hasAce = true;
         }
 
@@ -114,9 +116,12 @@ function Player(){
     };
 
     this.setCard = function(card){
-        var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
+        // var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
+        var newCardImageElement = $('<img>').attr('src',card.image).css('width','100%');
 
-        $('.player1').append(newCardElement);
+        // newCardElement.append(newCardImageElement);
+
+        $('.player1').append(newCardImageElement);
     };
 
     this.resetHand = function(){
@@ -218,9 +223,11 @@ function Dealer(){
     };
 
     this.setCard = function(card){
-        var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
+        // var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
 
-        $('.dealer').append(newCardElement);
+        var newCardImageElement = $('<img>').attr('src',card.image).css('width','100%');
+
+        $('.dealer').append(newCardImageElement);
     };
 
     this.resetHand = function(){
@@ -229,13 +236,13 @@ function Dealer(){
     };
 }
 
-function Card(suite, number, value){
+function Card(suite, number, value, imageUrl){
     var self = this;
     this.suite = suite;
     this.number = number;
     this.value = value;
 
-    this.image = null;
+    this.image = imageUrl;
 }
 
 var dealer = new Dealer();
