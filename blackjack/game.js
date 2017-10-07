@@ -1,8 +1,8 @@
 function Game(){
     var self = this;
     this.cardDeck = [];
-    this.suiteRef = ['Diamond','Club','Spades','Hearts'];
-    this.numRef = ['A',2,3,4,5,6,7,8,9,10,'J','Q','K'];
+    this.suiteRef = ['Diamonds','Clubs','Spades','Hearts'];
+    this.numRef = ['Ace',2,3,4,5,6,7,8,9,10,'Jack','Queen','King'];
     this.turn = 0;
 
     this.startDeck = function(){
@@ -38,25 +38,11 @@ function Game(){
     this.startGame = function(){
         self.startDeck();
         dealer.addCard(newGame.pullCards());
-        var dealerCard1suite = dealer.cardHand[0].suite;
-        var dealerCard1value = dealer.cardHand[0].value;
-        $('#dealerCard1').append(dealerCard1suite,dealerCard1value);
         player.addCard(newGame.pullCards());
-        var playerCard1suite = player.cardHand[0].suite;
-        var playerCard1value = player.cardHand[0].value;
-        $('#playerCard1').append(playerCard1suite,playerCard1value);
         dealer.addCard(newGame.pullCards());
-        var dealerCard2suite = dealer.cardHand[1].suite;
-        var dealerCard2value = dealer.cardHand[1].value;
-            $('#dealerCard2').append(dealerCard2suite,dealerCard2value);
         player.addCard(newGame.pullCards());
-        var playerCard2suite = player.cardHand[1].suite;
-        var playerCard2value = player.cardHand[1].value;
-            $('#playerCard2').append(playerCard2suite, playerCard2value);
 
         console.log("Game has started!");
-
-
 
     };
 
@@ -80,6 +66,7 @@ function Player(){
 
     this.addCard = function(card){
         self.cardHand.push(card);
+        self.setCard(card);
     };
 
     this.checkCard = function(){
@@ -88,9 +75,9 @@ function Player(){
 
     this.hit = function(){
         self.addCard(newGame.pullCards());
-        var playerCard3suite = player.cardHand[2].suite;
-        var playerCard3value = dealer.cardHand[2].value;
-        $('#playerCard3').append(playerCard3suite,playerCard3value);
+        // var playerCard3suite = player.cardHand[2].suite;
+        // var playerCard3value = dealer.cardHand[2].value;
+        // $('#playerCard3').append(playerCard3suite,playerCard3value);
         console.log("Player draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
 
         self.playerValue = dealer.checkPlayerCount(self.cardHand);
@@ -109,6 +96,12 @@ function Player(){
         dealer.hit();
     };
 
+    this.setCard = function(card){
+        var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
+
+        $('.player').append(newCardElement);
+    };
+
     this.resetHand = function(){
         self.cardHand = [];
         self.playerValue = 0;
@@ -123,7 +116,7 @@ function Dealer(){
 
     this.addCard = function(card){
         self.cardHand.push(card);
-        self.setCard();
+        self.setCard(card);
     };
 
     this.checkPlayerCount = function(playerHand){
@@ -196,8 +189,10 @@ function Dealer(){
         return self.cardHand;
     };
 
-    this.setCard = function(){
-//      $('#dealerCard1').text(self.cardHand[1].suite+self.cardHand[1].number);
+    this.setCard = function(card){
+        var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
+
+        $('.dealer').append(newCardElement);
     };
 
     this.resetHand = function(){
@@ -223,17 +218,10 @@ var newGame = new Game();
 
 $(document).ready(initializeApp);
 
-//  console.log(newGame.cardDeck);
-
-//
 function addClick(){
     $('#hit').click(player.hit);
 }
 
-//
-// $('#hit').click(function(){
-//     console.log('hit button hit')
-// });
 
 function initializeApp() {
     newGame.startGame();
