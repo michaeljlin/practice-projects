@@ -67,6 +67,8 @@ function Player(){
 
     this.hit = function(){
         self.addCard(newGame.pullCards());
+        console.log("Player draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
+
         self.playerValue = dealer.checkPlayerCount(self.cardHand);
 
         if(self.playerValue > 21){
@@ -120,6 +122,8 @@ function Dealer(){
 
     this.hit = function(){
         self.addCard(newGame.pullCards());
+        console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
+
         self.dealerValue = dealer.checkDealerCount(self.cardHand);
 
         if(self.dealerValue > 21){
@@ -142,7 +146,6 @@ function Dealer(){
             }
         }
         else if(self.dealerValue <= 16){
-            console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
             self.hit();
         }
         else{
