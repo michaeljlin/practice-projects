@@ -128,8 +128,21 @@ function Dealer(){
         else if(self.dealerValue === '21'){
             console.log("Dealer has 21!");
         }
+        else if(self.dealerValue > 16){
+            console.log('Game has ended! Comparing cards!');
+
+            if(player.playerValue > dealer.dealerValue){
+                console.log("Player has won!");
+            }
+            else if(player.playerValue < dealer.dealerValue){
+                console.log("Dealer has won!");
+            }
+            else{
+                console.log("Equal value, draw game!");
+            }
+        }
         else if(self.dealerValue <= 16){
-            console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1]);
+            console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1].number + " of "+ self.cardHand[self.cardHand.length-1].suite);
             self.hit();
         }
         else{
