@@ -6,11 +6,19 @@ function Game(){
     this.turn = 0;
 
     this.startDeck = function(){
+        var value = null;
         for(var i = 0; i< self.suiteRef.length; i++){
 
             for(var j = 0; j < self.numRef.length; j++){
 
-                var newCard = new Card(self.suiteRef[i], self.numRef[j]);
+                if(j>9){
+                    value = 10;
+                }
+                else {
+                    value = j+1;
+                }
+
+                var newCard = new Card(self.suiteRef[i], self.numRef[j], value);
                 self.cardDeck.push(newCard);
 
             }
@@ -35,17 +43,19 @@ function Game(){
         dealer.addCard(newGame.pullCards());
         player.addCard(newGame.pullCards());
 
-
     };
 
     this.turnChange = function(){
         this.turn = 1 - self.turn;
     }
+
+
 }
 
 function Player(){
     var self = this;
     this.cardHand = [];
+    this.playerValue = 0;
 
     this.addCard = function(card){
         self.cardHand.push(card);
@@ -56,21 +66,75 @@ function Player(){
     };
 
     this.hit = function(){
-        self.addCard(newGamecard);
+        self.addCard(newGame.pullCards());
+        self.playerValue = dealer.checkPlayerCount(self.cardHand);
+
+        if(self.playerValue > 21){
+            console.log("Player has busted!");
+        }
+        else{
+            console.log("Player continues to play");
+        }
     };
 
     this.stay = function(){
+        self.playerValue = dealer.checkPlayerCount(self.cardHand);
 
+        dealer.hit();
     }
 }
 
 function Dealer(){
     var self = this;
     this.cardHand = [];
+    this.dealerValue = 0;
 
     this.addCard = function(card){
         self.cardHand.push(card);
         self.setCard();
+    };
+
+    this.checkPlayerCount = function(playerHand){
+        var totalValue = null;
+
+        for(var i = 0; i < playerHand.length; i++){
+            totalValue += playerHand[i].value;
+        }
+
+        console.log('Player hand value is: '+totalValue);
+
+        return totalValue;
+    };
+
+    this.checkDealerCount = function(playerHand){
+        var totalValue = null;
+
+        for(var i = 0; i < playerHand.length; i++){
+            totalValue += playerHand[i].value;
+        }
+
+        console.log('Dealer hand value is: '+totalValue);
+
+        return totalValue;
+    };
+
+    this.hit = function(){
+        self.addCard(newGame.pullCards());
+        self.dealerValue = dealer.checkDealerCount(self.cardHand);
+
+        if(self.dealerValue > 21){
+            console.log("Dealer has busted!");
+        }
+        else if(self.dealerValue === '21'){
+            console.log("Dealer has 21!");
+        }
+        else if(self.dealerValue <= 16){
+            console.log("Dealer draws: "+self.cardHand[self.cardHand.length-1]);
+            self.hit();
+        }
+        else{
+            console.log("Dealer continues to play");
+        }
     };
 
     this.checkCard = function(){
@@ -82,10 +146,12 @@ function Dealer(){
     };
 }
 
-function Card(suite, number){
+function Card(suite, number, value){
     var self = this;
     this.suite = suite;
     this.number = number;
+    this.value = value;
+
     this.image = null;
 }
 
