@@ -42,6 +42,8 @@ function Game(){
         dealer.addCard(newGame.pullCards());
         player.addCard(newGame.pullCards());
         dealer.addCard(newGame.pullCards());
+        $('.dealer img:nth-child(2)').attr('src', 'images/cardback.svg');
+
         player.addCard(newGame.pullCards());
 
         console.log("Game has started!");
@@ -116,10 +118,7 @@ function Player(){
     };
 
     this.setCard = function(card){
-        // var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
         var newCardImageElement = $('<img>').attr('src',card.image).css('width','100%');
-
-        // newCardElement.append(newCardImageElement);
 
         $('.player1').append(newCardImageElement);
     };
@@ -173,6 +172,10 @@ function Dealer(){
     this.hit = function(){
         self.dealerValue = dealer.checkDealerCount(self.cardHand);
 
+        if($('.dealer img:nth-child(2)').attr('src') === 'images/cardback.svg'){
+            $('.dealer img:nth-child(2)').attr('src', self.cardHand[0].image);
+        }
+
         if(self.dealerValue > 21){
             console.log("Dealer has busted!");
             $('.result').text("Dealer has busted!");
@@ -223,7 +226,6 @@ function Dealer(){
     };
 
     this.setCard = function(card){
-        // var newCardElement = $('<div>').addClass("cardFormat").text(card.number+" of "+card.suite);
 
         var newCardImageElement = $('<img>').attr('src',card.image).css('width','100%');
 
