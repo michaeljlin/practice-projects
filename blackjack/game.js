@@ -112,6 +112,7 @@ function Player(){
 
         if(self.hasAce === true && self.playerValue < 12){
             self.aceSwap();
+            self.hasAce = false;
         }
 
         console.log('Final player value is: '+self.playerValue);
@@ -181,6 +182,7 @@ function Dealer(){
 
         if(self.dealerValue === 11 && self.hasAce === true){
             self.dealerValue = 21;
+            self.hasAce = false;
         }
 
         if($('.dealer img:nth-child(2)').attr('src') === 'images/cardback.svg'){
