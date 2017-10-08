@@ -110,9 +110,11 @@ function Player(){
     this.stay = function(){
         self.playerValue = dealer.checkPlayerCount(self.cardHand);
 
-        if(self.hasAce === true && self.playerValue < 11){
+        if(self.hasAce === true && self.playerValue < 12){
             self.aceSwap();
         }
+
+        console.log('Final player value is: '+self.playerValue);
 
         dealer.hit();
     };
