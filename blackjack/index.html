@@ -3,39 +3,71 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Sigmar+One|Rye" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="game.js"></script>
-    <title>JS Bin</title>
+    <title>Black Jack</title>
     <style>
         .screen{
-            display: flex;
+            /*display: flex;*/
+            font-family: 'Rye', cursive;
             /*flex-flow: row wrap;*/
             /*justify-content: center;*/
+        }
+
+        body {
+            background-color: darkgreen;
+        }
+
+        header {
+            font-size: 80px;
+            text-align: center;
+        }
+
+        .result {
+            font-size: 80px;
+        }
+
+        .participantContainer {
+            padding: 30px;
         }
 
         .dealer {
             height:150px;
             width:50%;
-            border:1px solid black;
+            margin: auto;
 
             display: flex;
             flex-flow: row;
             justify-content: space-around;
+        }
+
+        #dealerTitle {
+            font-family: 'Sigmar One', cursive;
+            font-size: 25px;
+            text-align: center;
         }
 
         .activePlayer {
             height:150px;
             width:50%;
-            border: 1px solid black;
+            margin: auto;
 
             display: flex;
             flex-flow: row;
             justify-content: space-around;
         }
 
+        #playerTitle {
+            font-family: 'Sigmar One', cursive;
+            font-size: 25px;
+            text-align: center;
+        }
+
         .controls {
             text-align: center;
-            margin-top:50px;
+            margin: 5px 0px;
+            justify-content: space-around;
         }
 
         .cardFormat{
@@ -46,26 +78,47 @@
             box-sizing: border-box;
         }
 
+        button {
+            font-family: 'Sigmar One', cursive;
+            height: 80px;
+            width: 85px;
+            background-color: yellow;
+            border: none;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 45px;
+            box-shadow: 7px 10px 8px black;
+        }
+
+        hr {
+            width: 60%;
+            border: 1px solid black;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="screen">
-        <div class ="dealer">
-            <p>Dealer</p>
+        <header class="title">Black Jack</header>
 
+        <!--DEALER SECTION-->
+        <div class="participantContainer">
+            <div id="dealerTitle">DEALER</div>
+            <div class ="dealer"></div>
         </div>
 
-        <div class = "controls">
-            <div id="turn">Turn:</div>
-            <button id="hit">Hit</button>
-            <button id="stay">Stay</button>
-            <button id="reset">Reset</button>
-            <p class="result"></p>
-        </div>
+        <hr>
 
-        <div class = "activePlayer player1">
-            <p>Player</p>
+        <!--PLAYERS-->
+        <div class="participantContainer">
+            <div class = "activePlayer player1"></div>
+            <div id="playerTitle">PLAYER</div>
         </div>
 
         <div class="player2">
@@ -83,6 +136,16 @@
         <div class="player5">
 
         </div>
+
+
+        <!--USER DECISION AREA-->
+        <div class = "controls">
+            <button id="hit">Hit</button>
+            <button id="stay">Stay</button>
+            <button id="reset">Reset</button>
+            <p class="result"></p>
+        </div>
+
     </div>
 </body>
 </html>

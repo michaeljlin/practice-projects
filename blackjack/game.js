@@ -58,8 +58,8 @@ function Game(){
         player.resetHand();
         dealer.resetHand();
         self.cardDeck = [];
-        $('.player1').text('').append($('<p>').text('Player'));
-        $('.dealer').text('').append($('<p>').text('Dealer'));
+        $('.player1').text('');
+        $('.dealer').text('');
         $('.result').text('');
         self.startGame();
     }
@@ -96,7 +96,7 @@ function Player(){
 
         if(self.playerValue > 21){
             console.log("Player has busted!");
-            $('.result').text("Player has busted!");
+            alert("Player has busted!");
         }
         else if(self.playerValue === 21){
             console.log("Player has 21, automatically ending turn!");
@@ -191,18 +191,18 @@ function Dealer(){
 
         if(self.dealerValue > 21){
             console.log("Dealer has busted!");
-            $('.result').text("Dealer has busted!");
+            alert("Dealer has busted!");
         }
         else if(self.dealerValue === '21'){
             console.log("Dealer has 21!");
 
             if(player.playerValue < dealer.dealerValue){
                 console.log("Dealer has won!");
-                $('.result').text("Dealer has won!");
+                alert("Dealer has won!");
             }
             else{
                 console.log("Equal value, draw game!");
-                $('.result').text("Equal value, draw game!");
+                alert("Equal value, draw game!");
             }
 
         }
@@ -211,15 +211,15 @@ function Dealer(){
 
             if(player.playerValue > dealer.dealerValue){
                 console.log("Player has won!");
-                $('.result').text("Player has won!");
+                alert("Player has won!");
             }
             else if(player.playerValue < dealer.dealerValue){
                 console.log("Dealer has won!");
-                $('.result').text("Dealer has won!");
+                alert("Dealer has won!");
             }
             else{
                 console.log("Equal value, draw game!");
-                $('.result').text("Equal value, draw game!");
+                alert("Equal value, draw game!");
             }
         }
         else if(self.dealerValue <= 16){
@@ -279,3 +279,4 @@ function initializeApp() {
     newGame.startGame();
     addClick();
 }
+
