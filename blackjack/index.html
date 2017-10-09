@@ -27,7 +27,7 @@
             height:150px;
             width:50%;
             border: 1px solid black;
-
+            position: relative;
             display: flex;
             flex-flow: row;
             justify-content: space-around;
@@ -46,6 +46,16 @@
             box-sizing: border-box;
         }
 
+        #playerChipCount{
+            display:inline-block;
+            position: absolute;
+            bottom:0;
+            right:87%
+        }
+
+        #bettingArea {
+            float:right;
+        }
     </style>
 </head>
 <body>
@@ -65,7 +75,9 @@
         </div>
 
         <div class = "activePlayer player1">
-            <p>Player</p>
+            <p>Player
+            <div id="playerChipCount"></div>
+            </p>
         </div>
 
         <div class="player2">
@@ -83,6 +95,11 @@
         <div class="player5">
 
         </div>
+    </div>
+    <div id="bettingArea">Betting Area
+        <button>1</button>
+        <button>10</button>
+        <button>100</button>
     </div>
 </body>
 </html>

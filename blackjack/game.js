@@ -71,6 +71,7 @@ function Player(){
     this.cardHand = [];
     this.playerValue = 0;
     this.hasAce = false;
+    this.playerStack = 0;
 
     this.addCard = function(card){
         if(card.number === 'ace'){
@@ -121,7 +122,7 @@ function Player(){
     };
 
     this.setCard = function(card){
-        var newCardImageElement = $('<img>').attr('src',card.image).css('width','100%');
+        var newCardImageElement = $('<img>').attr('src',card.image).css('width','16%');
 
         $('.player1').append(newCardImageElement);
     };
@@ -133,6 +134,18 @@ function Player(){
 
     this.aceSwap = function(){
         this.playerValue += 10;
+    };
+
+    this.playerChipStack = function (initialStack) {
+        // self.startingStack = initialStack;
+        // self.addChips = function(bet){
+        //     initialStack += bet;
+        // };
+        // self.removeChips = function (bet){
+        //     initialStack -= bet;
+        // }
+        this.playerStack += initialStack;
+        $('#playerChipCount').text(this.playerStack)
     }
 }
 
@@ -191,7 +204,7 @@ function Dealer(){
 
         if(self.dealerValue > 21){
             console.log("Dealer has busted!");
-            $('.result').text("Dealer has busted!");
+            $('.result').text("Dealer has busted, player wins");
         }
         else if(self.dealerValue === '21'){
             console.log("Dealer has 21!");
@@ -240,7 +253,7 @@ function Dealer(){
 
     this.setCard = function(card){
 
-        var newCardImageElement = $('<img>').attr('src',card.image).css('width','100%');
+        var newCardImageElement = $('<img>').attr('src',card.image).css('width','16%');
 
         $('.dealer').append(newCardImageElement);
     };
@@ -278,4 +291,5 @@ function addClick(){
 function initializeApp() {
     newGame.startGame();
     addClick();
+    player.playerChipStack(1000);
 }
