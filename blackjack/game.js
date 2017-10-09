@@ -64,6 +64,10 @@ function Game(){
         self.startGame();
     }
 
+    this.showMessage = function(textMessage){
+        $('.modalMessage p').text(textMessage);
+        $('#modalContainer').css('display', 'block');
+    }
 }
 
 function Player(){
@@ -96,7 +100,8 @@ function Player(){
 
         if(self.playerValue > 21){
             console.log("Player has busted!");
-            alert("Player has busted!");
+            // alert("Player has busted!");
+            newGame.showMessage("Dealer has busted!");
         }
         else if(self.playerValue === 21){
             console.log("Player has 21, automatically ending turn!");
@@ -186,23 +191,26 @@ function Dealer(){
         }
 
         if($('.dealer img:nth-child(2)').attr('src') === 'images/cardback.svg'){
-            $('.dealer img:nth-child(2)').attr('src', self.cardHand[0].image);
+            $('.dealer img:nth-child(2)').attr('src', self.cardHand[1].image);
         }
 
         if(self.dealerValue > 21){
             console.log("Dealer has busted!");
-            alert("Dealer has busted!");
+            // alert("Dealer has busted!");
+            newGame.showMessage("Dealer has busted!");
         }
         else if(self.dealerValue === '21'){
             console.log("Dealer has 21!");
 
             if(player.playerValue < dealer.dealerValue){
                 console.log("Dealer has won!");
-                alert("Dealer has won!");
+                // alert("Dealer has won!");
+                newGame.showMessage("Dealer has won!");
             }
             else{
                 console.log("Equal value, draw game!");
-                alert("Equal value, draw game!");
+                // alert("Equal value, draw game!");
+                newGame.showMessage("Equal value, draw game!");
             }
 
         }
@@ -211,15 +219,18 @@ function Dealer(){
 
             if(player.playerValue > dealer.dealerValue){
                 console.log("Player has won!");
-                alert("Player has won!");
+                // alert("Player has won!");
+                newGame.showMessage("Player has won!");
             }
             else if(player.playerValue < dealer.dealerValue){
                 console.log("Dealer has won!");
-                alert("Dealer has won!");
+                // alert("Dealer has won!");
+                newGame.showMessage("Dealer has won!");
             }
             else{
                 console.log("Equal value, draw game!");
-                alert("Equal value, draw game!");
+                // alert("Equal value, draw game!");
+                newGame.showMessage("Equal value, draw game!");
             }
         }
         else if(self.dealerValue <= 16){
@@ -272,6 +283,10 @@ function addClick(){
     $('#hit').click(player.hit);
     $('#stay').click(player.stay);
     $('#reset').click(newGame.resetGame);
+
+    $('#modalContainer').click(function(){
+        $('#modalContainer').css('display', 'none');
+    });
 }
 
 

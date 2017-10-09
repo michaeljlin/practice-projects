@@ -100,9 +100,36 @@
             border: 1px solid black;
         }
 
+        .modal{
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #00000059;
+            padding-top: 20vh;
+        }
+
+        .modalMessage{
+            background-color: white;
+            margin: auto;
+            border: 1px solid black;
+            width: 50%;
+            border-radius: 10px;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
+
+    <div id="modalContainer" class="modal">
+        <div class="modalMessage">
+            <p>Temporary Text</p>
+        </div>
+    </div>
 
     <div class="screen">
         <header class="title">Black Jack</header>
