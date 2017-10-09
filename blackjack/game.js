@@ -61,13 +61,20 @@ function Game(){
         $('.player1').text('');
         $('.dealer').text('');
         $('.result').text('');
+
+        $('#hit').on('click', player.hit);
+        $('#stay').on('click', player.stay);
+
         self.startGame();
-    }
+    };
 
     this.showMessage = function(textMessage){
+        $('#hit').off('click', player.hit);
+        $('#stay').off('click', player.stay);
+
         $('.modalMessage p').text(textMessage);
         $('#modalContainer').css('display', 'block');
-    }
+    };
 }
 
 function Player(){
@@ -280,9 +287,9 @@ var newGame = new Game();
 $(document).ready(initializeApp);
 
 function addClick(){
-    $('#hit').click(player.hit);
-    $('#stay').click(player.stay);
-    $('#reset').click(newGame.resetGame);
+    $('#hit').on('click', player.hit);
+    $('#stay').on('click', player.stay);
+    $('#reset').on('click', newGame.resetGame);
 
     $('#modalContainer').click(function(){
         $('#modalContainer').css('display', 'none');
