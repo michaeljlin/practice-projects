@@ -65,12 +65,18 @@ function Game(){
         $('#hit').on('click', player.hit);
         $('#stay').on('click', player.stay);
 
+        $('#hit').css('background-color', 'yellow');
+        $('#stay').css('background-color', 'yellow');
+
         self.startGame();
     };
 
     this.showMessage = function(textMessage){
         $('#hit').off('click', player.hit);
         $('#stay').off('click', player.stay);
+
+        $('#hit').css('background-color', '#444400');
+        $('#stay').css('background-color', '#444400');
 
         $('.modalMessage p').text(textMessage);
         $('#modalContainer').css('display', 'block');
